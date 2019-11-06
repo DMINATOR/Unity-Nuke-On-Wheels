@@ -5,23 +5,24 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-//Default
+//Generated on: 06.11.2019 20:38.55
 public class SettingsConstants
 {
 
     public enum Name
     {
-		MusicVolume,
-		SoundVolume,
+		MUSIC_VOLUME,
+		SOUND_VOLUME,
 		TIME_CONTROL_ELEMENTS_SIZE,
 		TIME_CONTROL_CHANGE_DIFFERENCE,
+
     }
 
     public static void Load()
     {
 		SettingsController.Instance.AddSetting(new SettingValue()
 		{
-			Name = Enum.GetName(typeof(SettingsConstants.Name), Name.MusicVolume),
+			Name = Enum.GetName(typeof(SettingsConstants.Name), Name.MUSIC_VOLUME),
 			Type = SettingValueType.Float,
 			MinValue = "0.0f",
 			DefaultValue = "0.5f",
@@ -29,7 +30,7 @@ public class SettingsConstants
 		});
 		SettingsController.Instance.AddSetting(new SettingValue()
 		{
-			Name = Enum.GetName(typeof(SettingsConstants.Name), Name.SoundVolume),
+			Name = Enum.GetName(typeof(SettingsConstants.Name), Name.SOUND_VOLUME),
 			Type = SettingValueType.Float,
 			MinValue = "0.0f",
 			DefaultValue = "0.7f",
