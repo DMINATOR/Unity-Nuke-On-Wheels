@@ -36,6 +36,7 @@ public class GameController : MonoBehaviour
     [Header("Status")]
     */
 
+    [Header("Save Instance")]
     [Tooltip("Current Save Instance")]
     public SaveSlotInstance CurrentSaveInstance;
 

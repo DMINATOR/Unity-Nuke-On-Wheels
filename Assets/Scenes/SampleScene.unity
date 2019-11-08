@@ -176,6 +176,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5083a6c6f109c514fbcf5bee907c00d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Locator: {fileID: 451141265}
+  CurrentSaveInstance:
+    Current: 0
+    Created:
+      _dateTimeValue: 01/01/0001 00:00:00
+    Modified:
+      _dateTimeValue: 01/01/0001 00:00:00
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
