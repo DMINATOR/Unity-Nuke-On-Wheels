@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class VehicleControllerLocator : MonoBehaviour
 {
-    [Tooltip("Components associated with this vehicle")]
-    public VehicleComponent[] Components;
+    [Tooltip("Axles associated with this vehicle")]
+    public VehicleComponent[] Axles;
+
+    [Tooltip("Body parts with this vehicle")]
+    public VehicleComponent[] Body;
 }

@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(VehicleComponentLocator))]
 public class VehicleComponent : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    //Exposed
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [Header("Locator")]
+
+    [Tooltip("Locator")]
+    public VehicleComponentLocator Locator;
+
+    [Header("Prefabs")]
+    public GameObject GameObjectInstance;
+
 }
