@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public class VehicleComponentLocator : MonoBehaviour
+public class VehicleWheelComponentLocator : VehicleComponentLocatorBase
 {
     // Start is called before the first frame update
     void Start()
