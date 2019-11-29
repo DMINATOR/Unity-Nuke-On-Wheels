@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class VehicleWheelComponentLocator : VehicleComponentLocatorBase
 {
+    [Tooltip("Collider to use for physics")]
+    public WheelCollider Collider;
+
     // Start is called before the first frame update
     void Start()
     {

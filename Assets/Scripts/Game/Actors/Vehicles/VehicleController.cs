@@ -19,6 +19,24 @@ public class VehicleController : MonoBehaviour
     [Tooltip("Locator")]
     public VehicleControllerLocator Locator;
 
+
+
+    [Header("Variables")]
+
+    [Tooltip("Maximum Torque")]
+    public float MaxMotorTorque;
+
+    [Tooltip("Maximum Steering Angle")]
+    public float MaxSteeringAngle;
+
+    [Tooltip("Increases / Decreases Throttle")]
+    [SerializeField]
+    public InputButton ButtonThrottle;
+
+    [Tooltip("Turns wheels Left / Right")]
+    [SerializeField]
+    public InputButton ButtonTurn;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +46,12 @@ public class VehicleController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        var throttle = MaxMotorTorque * Input.GetAxis(ButtonThrottle.KeyName);
+        var angle = MaxSteeringAngle * Input.GetAxis(ButtonTurn.KeyName);
+
+        foreach (var axle in Locator.Axles)
+        {
+            axle.ManualUpdate(angle, throttle);
+        }
     }
 }

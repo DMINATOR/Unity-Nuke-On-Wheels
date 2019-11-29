@@ -806,6 +806,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Locator: {fileID: 1394230548}
+  MaxMotorTorque: 400
+  MaxSteeringAngle: 30
+  ButtonThrottle:
+    InputKey: 1
+  ButtonTurn:
+    InputKey: 0
 --- !u!114 &1394230548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -845,7 +851,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1394230545}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ae3148cb51147024aaf1d494811990ee, type: 3}
   m_Name: 
@@ -1577,6 +1583,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ForceAppPointDistance
       value: 0.77559984
+      objectReference: {fileID: 0}
+    - target: {fileID: 1637127122872924543, guid: f4901d2264660b04d8a6438b86e96e54,
+        type: 3}
+      propertyPath: Motor
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1637127122872924543, guid: f4901d2264660b04d8a6438b86e96e54,
+        type: 3}
+      propertyPath: Steering
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1807854410569989386, guid: f4901d2264660b04d8a6438b86e96e54,
         type: 3}

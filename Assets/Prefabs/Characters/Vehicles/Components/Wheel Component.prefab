@@ -59,7 +59,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c452c786fe5aabf47bcf7b0d007601fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameObjectPrefab: {fileID: 0}
+  GameObjectPrefab: {fileID: 2762491811359844179}
+  Collider: {fileID: 8157026921697982199}
 --- !u!1 &8319315586313508507
 GameObject:
   m_ObjectHideFlags: 0
@@ -190,6 +191,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 93fbd68c659e49741ac8b560867f25a3, type: 3}
+--- !u!1 &2762491811359844179 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 93fbd68c659e49741ac8b560867f25a3,
+    type: 3}
+  m_PrefabInstance: {fileID: 6158596335978692186}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1156596563847517504 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 93fbd68c659e49741ac8b560867f25a3,
