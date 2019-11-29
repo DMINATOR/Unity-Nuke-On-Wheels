@@ -36,19 +36,26 @@ public class VehicleAxleComponent : VehicleComponentBase
 
     public void ManualUpdate(float angle, float throttle)
     {
-        if( Motor && Steering )
+        if( Motor || Steering )
         {
-            TargetAngle = angle;
-            TargetThrottle = throttle;
+            if( Steering)
+            {
+                TargetAngle = angle;
+            }
+
+            if( Motor )
+            {
+                TargetThrottle = throttle;
+            }
 
             if( Locator.WheelLeftComponent != null )
             {
-                Locator.WheelLeftComponent.ManualUpdate(angle, throttle);
+                Locator.WheelLeftComponent.ManualUpdate(TargetAngle, TargetThrottle);
             }
 
             if (Locator.WheelRightComponent != null)
             {
-                Locator.WheelRightComponent.ManualUpdate(angle, throttle);
+                Locator.WheelRightComponent.ManualUpdate(TargetAngle, TargetThrottle);
             }
         }
     }
