@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -29,25 +30,16 @@ public class VehicleController : MonoBehaviour
     [Tooltip("Maximum Steering Angle")]
     public float MaxSteeringAngle;
 
-    [Tooltip("Increases / Decreases Throttle")]
-    [SerializeField]
-    public InputButton ButtonThrottle;
-
-    [Tooltip("Turns wheels Left / Right")]
-    [SerializeField]
-    public InputButton ButtonTurn;
-
     // Start is called before the first frame update
     void Start()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    internal void ManualUpdate(float throttleInput, float angleInput)
     {
-        var throttle = MaxMotorTorque * Input.GetAxis(ButtonThrottle.KeyName);
-        var angle = MaxSteeringAngle * Input.GetAxis(ButtonTurn.KeyName);
+        var throttle = MaxMotorTorque * throttleInput;
+        var angle = MaxSteeringAngle * angleInput;
 
         foreach (var axle in Locator.Axles)
         {

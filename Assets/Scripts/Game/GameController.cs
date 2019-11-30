@@ -36,6 +36,18 @@ public class GameController : MonoBehaviour
     [Header("Status")]
     */
 
+    [Header("Input")]
+
+    [Tooltip("Increases / Decreases Throttle")]
+    [SerializeField]
+    public InputButton ButtonThrottle;
+
+    [Tooltip("Turns wheels Left / Right")]
+    [SerializeField]
+    public InputButton ButtonTurn;
+
+
+
     [Header("Save Instance")]
     [Tooltip("Current Save Instance")]
     public SaveSlotInstance CurrentSaveInstance;
@@ -99,6 +111,19 @@ public class GameController : MonoBehaviour
         LoadGameData();
 
         StartGame();
+    }
+
+    void Update()
+    {
+        UpdateInputVehiclePhysics();
+    }
+
+    private void UpdateInputVehiclePhysics()
+    {
+        if( Locator.PlayerControllerVehicle != null )
+        {
+            Locator.PlayerControllerVehicle.ManualUpdate(Input.GetAxis(ButtonThrottle.KeyName), Input.GetAxis(ButtonTurn.KeyName));
+        }
     }
 
     private void StartGame()
