@@ -16,18 +16,17 @@ public class VehicleWheelComponent : VehicleComponentBase
         Locator.Collider.steerAngle = angle;
         Locator.Collider.motorTorque = throttle;
 
-        if (Locator.Collider.transform.childCount == 0)
-        {
-            return;
-        }
+        ManualUpdate();
+    }
 
-        Transform visualWheel = Locator.Collider.transform.GetChild(0);
-
+    internal void ManualUpdate()
+    {
+        // Update visual representation of the wheel
         Vector3 position;
         Quaternion rotation;
         Locator.Collider.GetWorldPose(out position, out rotation);
 
-        visualWheel.transform.position = position;
-        visualWheel.transform.rotation = rotation;
+        Locator.GameObjectPrefab.transform.position = position;
+        Locator.GameObjectPrefab.transform.rotation = rotation;
     }
 }

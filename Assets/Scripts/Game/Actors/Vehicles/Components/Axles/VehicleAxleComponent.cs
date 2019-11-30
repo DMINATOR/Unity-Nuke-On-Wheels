@@ -47,16 +47,16 @@ public class VehicleAxleComponent : VehicleComponentBase
             {
                 TargetThrottle = throttle;
             }
+        }
 
-            if( Locator.WheelLeftComponent != null )
-            {
-                Locator.WheelLeftComponent.ManualUpdate(TargetAngle, TargetThrottle);
-            }
+        if (Locator.WheelLeftComponent != null)
+        {
+            Locator.WheelLeftComponent?.ManualUpdate(TargetAngle, TargetThrottle);
+        }
 
-            if (Locator.WheelRightComponent != null)
-            {
-                Locator.WheelRightComponent.ManualUpdate(TargetAngle, TargetThrottle);
-            }
+        if (Locator.WheelRightComponent != null)
+        {
+            Locator.WheelRightComponent?.ManualUpdate(TargetAngle, TargetThrottle);
         }
     }
 }
