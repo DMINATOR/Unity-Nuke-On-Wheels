@@ -40,13 +40,15 @@ public class GameController : MonoBehaviour
 
     [Tooltip("Increases / Decreases Throttle")]
     [SerializeField]
-    public InputButton ButtonThrottle;
+    public InputButton VehicleButtonThrottle;
 
     [Tooltip("Turns wheels Left / Right")]
     [SerializeField]
-    public InputButton ButtonTurn;
+    public InputButton VehicleButtonTurn;
 
-
+    [Tooltip("Changes active camera")]
+    [SerializeField]
+    public InputButton VehicleToggleCamera;
 
     [Header("Save Instance")]
     [Tooltip("Current Save Instance")]
@@ -122,7 +124,12 @@ public class GameController : MonoBehaviour
     {
         if( Locator.PlayerControllerVehicle != null )
         {
-            Locator.PlayerControllerVehicle.ManualUpdate(Input.GetAxis(ButtonThrottle.KeyName), Input.GetAxis(ButtonTurn.KeyName));
+            Locator.PlayerControllerVehicle.ManualUpdate(Input.GetAxis(VehicleButtonThrottle.KeyName), Input.GetAxis(VehicleButtonTurn.KeyName));
+
+            if( Input.GetButtonUp(VehicleToggleCamera.KeyName))
+            {
+                Locator.PlayerControllerVehicle.ToggleCamera();
+            }
         }
     }
 

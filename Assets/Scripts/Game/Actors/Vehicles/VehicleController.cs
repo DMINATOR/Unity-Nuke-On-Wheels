@@ -46,4 +46,26 @@ public class VehicleController : MonoBehaviour
             axle.ManualUpdate(angle, throttle);
         }
     }
+
+    internal void ToggleCamera()
+    {
+        var index = 0;
+
+        // Find active and disable current camera
+        foreach(var camera in Locator.Cameras)
+        {
+            if( camera.gameObject.activeSelf)
+            {
+                camera.gameObject.SetActive(false);
+                break;
+            }
+
+            index++;
+        }
+
+        // Find next camera index to enable
+        index = (index + 1) % Locator.Cameras.Length;
+
+        Locator.Cameras[index].gameObject.SetActive(true);
+    }
 }

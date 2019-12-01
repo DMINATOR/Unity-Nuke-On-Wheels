@@ -7,6 +7,9 @@ public class VehicleControllerLocator : MonoBehaviour
     [Tooltip("Axles associated with this vehicle")]
     public VehicleAxleComponent[] Axles;
 
-    [Tooltip("Body parts with this vehicle")]
-    public VehicleComponentBase[] Body;
+    [Tooltip("Body part of this vehicle")]
+    public VehicleComponentBase Body;
+
+    [Tooltip("Cameras")]
+    public Camera[] Cameras;
 }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-//Default
+//Generated on: 01.12.2019 20:44.28
 public class InputMapping
 {
 
@@ -21,6 +21,7 @@ public class InputMapping
 		MouseScrollWheel,
 		Submit,
 		Cancel,
+		Vehicle_ToggleCamera,
 
     }
 
@@ -118,6 +119,12 @@ public class InputMapping
 		{
 			new InputMappingKey(){
 			 Name = "Cancel", DescriptiveName = "", DescriptiveNegativeName = "", NegativeButton = "", PositiveButton = "escape", AltNegativeButton = "", AltPositiveButton = "joystick button 1"
+			}
+		});
+		InputController.Instance.Add(InputMappingKeyName.Vehicle_ToggleCamera, new List<InputMappingKey>()
+		{
+			new InputMappingKey(){
+			 Name = "Vehicle_ToggleCamera", DescriptiveName = "", DescriptiveNegativeName = "", NegativeButton = "", PositiveButton = "c", AltNegativeButton = "", AltPositiveButton = ""
 			}
 		});
 
