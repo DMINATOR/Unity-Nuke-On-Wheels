@@ -1,12 +1,20 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(VehicleControllerLocator))]
 public class VehicleController : MonoBehaviour
 {
-    //Not exposed
+    // Not exposed
+
+    // Back camera that can be rotate, if located
+    private Camera BackCamera = null;
+
+    [Tooltip("Current Time Scale Instance assigned for this object")]
+    [SerializeField]
+    private TimeControlTimeScale _instance;
 
     [Header("Constants")]
     [ReadOnly]
@@ -21,7 +29,6 @@ public class VehicleController : MonoBehaviour
     public VehicleControllerLocator Locator;
 
 
-
     [Header("Variables")]
 
     [Tooltip("Maximum Torque")]
@@ -33,7 +40,13 @@ public class VehicleController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        _instance = TimeControlController.Instance.CreateTimeScaleInstance(this);
+        BackCamera = Locator.Cameras.SingleOrDefault(c => c.gameObject.layer == LayerMask.NameToLayer("Camera_Back"));
+    }
+
+    internal void UpdateTime()
+    {
+        _instance.Update();
     }
 
     internal void ManualUpdate(float throttleInput, float angleInput)
@@ -44,6 +57,23 @@ public class VehicleController : MonoBehaviour
         foreach (var axle in Locator.Axles)
         {
             axle.ManualUpdate(angle, throttle);
+        }
+    }
+
+    internal void UpdateCameraRotation(float rotation)
+    {
+        if(BackCamera != null)
+        {
+            var rotationCalculated = rotation * 1.0f * _instance.TimeScaleDelta * Mathf.PI;
+
+            if (rotation != 0.0f)
+            {
+                var rotationQ = BackCamera.transform.rotation * Quaternion.Euler(Vector3.up * rotation);
+
+                //Apply transform
+                BackCamera.transform.position = BackCamera.transform.position;
+                BackCamera.transform.rotation = rotationQ;
+            }
         }
     }
 

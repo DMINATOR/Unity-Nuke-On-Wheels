@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-//Generated on: 01.12.2019 20:44.28
+//Generated on: 01.12.2019 21:13.54
 public class InputMapping
 {
 
@@ -16,7 +16,7 @@ public class InputMapping
 		Fire2,
 		Fire3,
 		Jump,
-		MouseX,
+		Vehicle_RotateCamera,
 		MouseY,
 		MouseScrollWheel,
 		Submit,
@@ -87,10 +87,10 @@ public class InputMapping
 			 Name = "Jump", DescriptiveName = "", DescriptiveNegativeName = "", NegativeButton = "", PositiveButton = "joystick button 3", AltNegativeButton = "", AltPositiveButton = ""
 			}
 		});
-		InputController.Instance.Add(InputMappingKeyName.MouseX, new List<InputMappingKey>()
+		InputController.Instance.Add(InputMappingKeyName.Vehicle_RotateCamera, new List<InputMappingKey>()
 		{
 			new InputMappingKey(){
-			 Name = "Mouse X", DescriptiveName = "", DescriptiveNegativeName = "", NegativeButton = "", PositiveButton = "", AltNegativeButton = "", AltPositiveButton = ""
+			 Name = "Vehicle_RotateCamera", DescriptiveName = "", DescriptiveNegativeName = "", NegativeButton = "", PositiveButton = "", AltNegativeButton = "", AltPositiveButton = ""
 			}
 		});
 		InputController.Instance.Add(InputMappingKeyName.MouseY, new List<InputMappingKey>()

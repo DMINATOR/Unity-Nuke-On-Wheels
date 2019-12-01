@@ -326,7 +326,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.4192486, y: 3.0598578, z: -0.7578057}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 2128397083}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -362,6 +363,8 @@ MonoBehaviour:
     InputKey: 0
   VehicleToggleCamera:
     InputKey: 11
+  VehicleRotateCameraX:
+    InputKey: 6
   CurrentSaveInstance:
     Current: 0
     Created:
@@ -1864,6 +1867,58 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.372859, y: 0.5662651, z: 1.5402656}
   m_Center: {x: 0.04185143, y: 0.77235174, z: -0.52124226}
+--- !u!1 &2128397082
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2128397083}
+  - component: {fileID: 2128397084}
+  m_Layer: 0
+  m_Name: TimeController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2128397083
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2128397082}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.9992268, y: -0.9629116, z: 1.4453862}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 451141264}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2128397084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2128397082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dea64bcf1aa37243b31431487d68eeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TIME_CONTROL_ELEMENTS_SIZE_NAME: 2
+  TIME_CONTROL_CHANGE_DIFFERENCE: 3
+  ElementsSize: 0
+  ThresholdChangeDifference: 0
+  _timeScale: 1
+  DebugShowControlObjects: 0
+  DebugShowControlObjectsFullPath: 0
+  DebugShowControlObjectsTime: 10
+  Override: {fileID: 0}
 --- !u!4 &2130591496 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1637127122872924541, guid: f4901d2264660b04d8a6438b86e96e54,

@@ -50,6 +50,10 @@ public class GameController : MonoBehaviour
     [SerializeField]
     public InputButton VehicleToggleCamera;
 
+    [Tooltip("Vehicle Camera rotation")]
+    [SerializeField]
+    public InputButton VehicleRotateCameraX;
+
     [Header("Save Instance")]
     [Tooltip("Current Save Instance")]
     public SaveSlotInstance CurrentSaveInstance;
@@ -117,19 +121,23 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
-        UpdateInputVehiclePhysics();
+        UpdateInputVehicle();
     }
 
-    private void UpdateInputVehiclePhysics()
+    private void UpdateInputVehicle()
     {
         if( Locator.PlayerControllerVehicle != null )
         {
+            Locator.PlayerControllerVehicle.UpdateTime();
+
             Locator.PlayerControllerVehicle.ManualUpdate(Input.GetAxis(VehicleButtonThrottle.KeyName), Input.GetAxis(VehicleButtonTurn.KeyName));
 
             if( Input.GetButtonUp(VehicleToggleCamera.KeyName))
             {
                 Locator.PlayerControllerVehicle.ToggleCamera();
             }
+
+            Locator.PlayerControllerVehicle.UpdateCameraRotation(Input.GetAxis(VehicleRotateCameraX.KeyName));
         }
     }
 
