@@ -362,9 +362,11 @@ MonoBehaviour:
   VehicleButtonTurn:
     InputKey: 0
   VehicleToggleCamera:
-    InputKey: 11
+    InputKey: 3
   VehicleRotateCameraX:
-    InputKey: 6
+    InputKey: 8
+  VehicleRotateCameraY:
+    InputKey: 7
   CurrentSaveInstance:
     Current: 0
     Created:

@@ -23,6 +23,19 @@ public class VehicleController : MonoBehaviour
 
     //Exposed
 
+    [Header("Settings")]
+
+    [ReadOnly]
+    [Tooltip("Settings to control speed of a vehicle camera X direction")]
+    public SettingsConstants.Name VEHICLE_CAMERA_SPEED_X_NAME = SettingsConstants.Name.VEHICLE_CAMERA_SPEED_X;
+
+    [Header("Loaded Settings")]
+
+    [ReadOnly]
+    [Tooltip("Speed of vehicle camera movement X direction")]
+    public float VehicleCameraSpeedX;
+
+
     [Header("Locator")]
 
     [Tooltip("Locator")]
@@ -42,6 +55,9 @@ public class VehicleController : MonoBehaviour
     {
         _instance = TimeControlController.Instance.CreateTimeScaleInstance(this);
         BackCamera = Locator.Cameras.SingleOrDefault(c => c.gameObject.layer == LayerMask.NameToLayer("Camera_Back"));
+
+        //Create initial objects
+        VehicleCameraSpeedX = SettingsController.Instance.GetValue<float>(VEHICLE_CAMERA_SPEED_X_NAME);
     }
 
     internal void UpdateTime()
@@ -60,20 +76,12 @@ public class VehicleController : MonoBehaviour
         }
     }
 
-    internal void UpdateCameraRotation(float rotation)
+    internal void UpdateCameraRotation(float rotationX, float rotationY)
     {
-        if(BackCamera != null)
+        if(BackCamera != null && BackCamera.isActiveAndEnabled)
         {
-            var rotationCalculated = rotation * 1.0f * _instance.TimeScaleDelta * Mathf.PI;
-
-            if (rotation != 0.0f)
-            {
-                var rotationQ = BackCamera.transform.rotation * Quaternion.Euler(Vector3.up * rotation);
-
-                //Apply transform
-                BackCamera.transform.position = BackCamera.transform.position;
-                BackCamera.transform.rotation = rotationQ;
-            }
+            var rotationCalculated = rotationX * VehicleCameraSpeedX * _instance.UnityDeltaTime;
+            BackCamera.transform.RotateAround(gameObject.transform.position, Vector3.up, rotationCalculated);
         }
     }
 
