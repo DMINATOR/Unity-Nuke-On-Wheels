@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-//Generated on: 09.12.2019 22:15.31
+//Generated on: 10.12.2019 22:22.34
 public class SettingsConstants
 {
 
@@ -16,6 +16,7 @@ public class SettingsConstants
 		TIME_CONTROL_ELEMENTS_SIZE,
 		TIME_CONTROL_CHANGE_DIFFERENCE,
 		VEHICLE_CAMERA_SPEED_X,
+		VEHICLE_CAMERA_SPEED_Y,
 
     }
 
@@ -58,7 +59,15 @@ public class SettingsConstants
 			Name = Enum.GetName(typeof(SettingsConstants.Name), Name.VEHICLE_CAMERA_SPEED_X),
 			Type = SettingValueType.Float,
 			MinValue = "1",
-			DefaultValue = "100",
+			DefaultValue = "1",
+			MaxValue = "1000"
+		});
+		SettingsController.Instance.AddSetting(new SettingValue()
+		{
+			Name = Enum.GetName(typeof(SettingsConstants.Name), Name.VEHICLE_CAMERA_SPEED_Y),
+			Type = SettingValueType.Float,
+			MinValue = "1",
+			DefaultValue = "1",
 			MaxValue = "1000"
 		});
 

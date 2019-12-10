@@ -143,6 +143,7 @@ GameObject:
   - component: {fileID: 232683107}
   - component: {fileID: 232683109}
   - component: {fileID: 232683108}
+  - component: {fileID: 232683110}
   m_Layer: 23
   m_Name: Back Camera
   m_TagString: MainCamera
@@ -215,6 +216,26 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &232683110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 232683106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b3a7fdce6f56634ab7b9a188b317c64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 1394230546}
+  distance: 50
+  xSpeed: 10
+  ySpeed: 100
+  yMinLimit: 5
+  yMaxLimit: 80
+  distanceMin: 5
+  distanceMax: 15
 --- !u!1 &279073601
 GameObject:
   m_ObjectHideFlags: 0
@@ -1253,6 +1274,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4491bc43a20b7d049b0e396237b5f006, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  VEHICLE_CAMERA_SPEED_X_NAME: 4
+  VEHICLE_CAMERA_SPEED_Y_NAME: 5
+  VehicleCameraSpeedX: 0
+  VehicleCameraSpeedY: 0
   Locator: {fileID: 1394230548}
   MaxMotorTorque: 400
   MaxSteeringAngle: 30
