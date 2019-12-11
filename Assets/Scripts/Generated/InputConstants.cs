@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-//Generated on: 09.12.2019 21:34.26
+//Generated on: 11.12.2019 21:21.21
 public class InputMapping
 {
 
@@ -13,13 +13,16 @@ public class InputMapping
 		Horizontal,
 		Vertical,
 		Fire1,
-		Toggle_Camera,
+		Camera_Toggle,
 		Fire2,
 		Fire3,
 		Jump,
 		MouseY,
+		Camera_Rotate_Y,
 		MouseX,
+		Camera_Rotate_X,
 		MouseScrollWheel,
+		Camera_Zoom,
 		Submit,
 		Cancel,
 
@@ -57,10 +60,10 @@ public class InputMapping
 			 Name = "Fire1", DescriptiveName = "", DescriptiveNegativeName = "", NegativeButton = "", PositiveButton = "joystick button 0", AltNegativeButton = "", AltPositiveButton = ""
 			}
 		});
-		InputController.Instance.Add(InputMappingKeyName.Toggle_Camera, new List<InputMappingKey>()
+		InputController.Instance.Add(InputMappingKeyName.Camera_Toggle, new List<InputMappingKey>()
 		{
 			new InputMappingKey(){
-			 Name = "Toggle_Camera", DescriptiveName = "", DescriptiveNegativeName = "", NegativeButton = "", PositiveButton = "c", AltNegativeButton = "", AltPositiveButton = "mouse 0"
+			 Name = "Camera_Toggle", DescriptiveName = "", DescriptiveNegativeName = "", NegativeButton = "", PositiveButton = "c", AltNegativeButton = "", AltPositiveButton = "mouse 0"
 			}
 		});
 		InputController.Instance.Add(InputMappingKeyName.Fire2, new List<InputMappingKey>()
@@ -99,16 +102,34 @@ public class InputMapping
 			 Name = "Mouse Y", DescriptiveName = "", DescriptiveNegativeName = "", NegativeButton = "", PositiveButton = "", AltNegativeButton = "", AltPositiveButton = ""
 			}
 		});
+		InputController.Instance.Add(InputMappingKeyName.Camera_Rotate_Y, new List<InputMappingKey>()
+		{
+			new InputMappingKey(){
+			 Name = "Camera_Rotate_Y", DescriptiveName = "", DescriptiveNegativeName = "", NegativeButton = "", PositiveButton = "", AltNegativeButton = "", AltPositiveButton = ""
+			}
+		});
 		InputController.Instance.Add(InputMappingKeyName.MouseX, new List<InputMappingKey>()
 		{
 			new InputMappingKey(){
 			 Name = "Mouse X", DescriptiveName = "", DescriptiveNegativeName = "", NegativeButton = "", PositiveButton = "", AltNegativeButton = "", AltPositiveButton = ""
 			}
 		});
+		InputController.Instance.Add(InputMappingKeyName.Camera_Rotate_X, new List<InputMappingKey>()
+		{
+			new InputMappingKey(){
+			 Name = "Camera_Rotate_X", DescriptiveName = "", DescriptiveNegativeName = "", NegativeButton = "", PositiveButton = "", AltNegativeButton = "", AltPositiveButton = ""
+			}
+		});
 		InputController.Instance.Add(InputMappingKeyName.MouseScrollWheel, new List<InputMappingKey>()
 		{
 			new InputMappingKey(){
 			 Name = "Mouse ScrollWheel", DescriptiveName = "", DescriptiveNegativeName = "", NegativeButton = "", PositiveButton = "", AltNegativeButton = "", AltPositiveButton = ""
+			}
+		});
+		InputController.Instance.Add(InputMappingKeyName.Camera_Zoom, new List<InputMappingKey>()
+		{
+			new InputMappingKey(){
+			 Name = "Camera_Zoom", DescriptiveName = "", DescriptiveNegativeName = "", NegativeButton = "", PositiveButton = "", AltNegativeButton = "", AltPositiveButton = ""
 			}
 		});
 		InputController.Instance.Add(InputMappingKeyName.Submit, new List<InputMappingKey>()

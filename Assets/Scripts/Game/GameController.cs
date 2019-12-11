@@ -50,13 +50,6 @@ public class GameController : MonoBehaviour
     [SerializeField]
     public InputButton VehicleToggleCamera;
 
-    [Tooltip("Vehicle Camera rotation vertical")]
-    [SerializeField]
-    public InputButton VehicleRotateCameraX;
-
-    [Tooltip("Vehicle Camera rotation horizontal")]
-    [SerializeField]
-    public InputButton VehicleRotateCameraY;
 
     [Header("Save Instance")]
     [Tooltip("Current Save Instance")]
@@ -140,8 +133,6 @@ public class GameController : MonoBehaviour
             {
                 Locator.PlayerControllerVehicle.ToggleCamera();
             }
-
-            Locator.PlayerControllerVehicle.UpdateCameraRotation(Input.GetAxis(VehicleRotateCameraX.KeyName), Input.GetAxis(VehicleRotateCameraY.KeyName));
         }
     }
 

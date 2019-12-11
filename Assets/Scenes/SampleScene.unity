@@ -144,6 +144,8 @@ GameObject:
   - component: {fileID: 232683109}
   - component: {fileID: 232683108}
   - component: {fileID: 232683110}
+  - component: {fileID: 232683112}
+  - component: {fileID: 232683111}
   m_Layer: 23
   m_Name: Back Camera
   m_TagString: MainCamera
@@ -223,7 +225,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 232683106}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b3a7fdce6f56634ab7b9a188b317c64, type: 3}
   m_Name: 
@@ -236,6 +238,50 @@ MonoBehaviour:
   yMaxLimit: 80
   distanceMin: 5
   distanceMax: 15
+--- !u!114 &232683111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 232683106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0019f7294aa184e4999964ac6eb89869, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Camera: {fileID: 232683109}
+  TargetObject: {fileID: 1394230546}
+--- !u!114 &232683112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 232683106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47b7d79926c3a3a4381a0e3b2defe884, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Locator: {fileID: 232683111}
+  VEHICLE_CAMERA_SPEED_X_NAME: 4
+  VEHICLE_CAMERA_SPEED_Y_NAME: 5
+  VEHICLE_CAMERA_MIN_LIMIT_Y_NAME: 6
+  VEHICLE_CAMERA_MAX_LIMIT_Y_NAME: 7
+  VEHICLE_CAMERA_MIN_DISTANCE_NAME: 8
+  VEHICLE_CAMERA_MAX_DISTANCE_NAME: 9
+  VehicleCameraSpeedX: 0
+  VehicleCameraSpeedY: 0
+  VehicleRotateCameraX:
+    InputKey: 10
+  VehicleRotateCameraY:
+    InputKey: 8
+  VehicleZoomCamera:
+    InputKey: 12
+  Distance: 5
+  X: 0
+  Y: 0
 --- !u!1 &279073601
 GameObject:
   m_ObjectHideFlags: 0
@@ -384,10 +430,6 @@ MonoBehaviour:
     InputKey: 0
   VehicleToggleCamera:
     InputKey: 3
-  VehicleRotateCameraX:
-    InputKey: 8
-  VehicleRotateCameraY:
-    InputKey: 7
   CurrentSaveInstance:
     Current: 0
     Created:
@@ -1274,13 +1316,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4491bc43a20b7d049b0e396237b5f006, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  VEHICLE_CAMERA_SPEED_X_NAME: 4
-  VEHICLE_CAMERA_SPEED_Y_NAME: 5
-  VehicleCameraSpeedX: 0
-  VehicleCameraSpeedY: 0
   Locator: {fileID: 1394230548}
   MaxMotorTorque: 400
   MaxSteeringAngle: 30
+  VehicleCameraDistance: 0
 --- !u!114 &1394230548
 MonoBehaviour:
   m_ObjectHideFlags: 0
