@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-//Generated on: 11.12.2019 22:53.16
+//Generated on: 18.12.2019 21:56.03
 public class SettingsConstants
 {
 
@@ -21,6 +21,8 @@ public class SettingsConstants
 		VEHICLE_CAMERA_MAX_LIMIT_Y,
 		VEHICLE_CAMERA_MIN_DISTANCE,
 		VEHICLE_CAMERA_MAX_DISTANCE,
+		BLOCK_SIZE,
+		BLOCK_OUT_RESCALE,
 
     }
 
@@ -79,7 +81,7 @@ public class SettingsConstants
 			Name = Enum.GetName(typeof(SettingsConstants.Name), Name.VEHICLE_CAMERA_MIN_LIMIT_Y),
 			Type = SettingValueType.Float,
 			MinValue = "-180",
-			DefaultValue = "-20",
+			DefaultValue = "10",
 			MaxValue = "1000"
 		});
 		SettingsController.Instance.AddSetting(new SettingValue()
@@ -101,6 +103,22 @@ public class SettingsConstants
 		SettingsController.Instance.AddSetting(new SettingValue()
 		{
 			Name = Enum.GetName(typeof(SettingsConstants.Name), Name.VEHICLE_CAMERA_MAX_DISTANCE),
+			Type = SettingValueType.Float,
+			MinValue = "0",
+			DefaultValue = "15",
+			MaxValue = "1000"
+		});
+		SettingsController.Instance.AddSetting(new SettingValue()
+		{
+			Name = Enum.GetName(typeof(SettingsConstants.Name), Name.BLOCK_SIZE),
+			Type = SettingValueType.Integer,
+			MinValue = "0",
+			DefaultValue = "15",
+			MaxValue = "1000"
+		});
+		SettingsController.Instance.AddSetting(new SettingValue()
+		{
+			Name = Enum.GetName(typeof(SettingsConstants.Name), Name.BLOCK_OUT_RESCALE),
 			Type = SettingValueType.Float,
 			MinValue = "0",
 			DefaultValue = "15",
