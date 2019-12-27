@@ -73,4 +73,13 @@ public class OpenWorldController : MonoBehaviour
     {
         
     }
+
+    public void ResetWorldToCenter()
+    {
+        Log.Instance.Info(LOG_SOURCE, "ResetWorldToCenter");
+
+        var transform = Locator.PlayerOrigin.transform;
+
+        Locator.PlayerOrigin.transform.localPosition = new Vector3(0, transform.localPosition.y, 0); // Keep Y unchanged
+    }
 }

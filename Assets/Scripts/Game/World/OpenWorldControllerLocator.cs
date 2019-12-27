@@ -9,7 +9,7 @@ public class OpenWorldControllerLocator : MonoBehaviour
     [Tooltip("Prefab to contain cache of OpenWorld blocks")]
     public GameObject OpenWorldBlocksCachePrefab;
 
-    [Tooltip("Current origin of the world")]
-    public OpenWorldOrigin Origin;
+    [Tooltip("Current origin of the world from player perspective")]
+    public OpenWorldOrigin PlayerOrigin;
 
 }
