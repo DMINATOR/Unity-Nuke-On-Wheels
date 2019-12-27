@@ -2245,7 +2245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OpenWorldBlocksCachePrefab: {fileID: 229314685}
-  Origin: {fileID: 1394230552}
+  PlayerOrigin: {fileID: 1394230552}
 --- !u!1 &2128397082
 GameObject:
   m_ObjectHideFlags: 0
