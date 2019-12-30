@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,6 +10,14 @@ public class OpenWorldController : MonoBehaviour
     [ReadOnly]
     [Tooltip("Logging source")]
     public static string LOG_SOURCE = "OpenWorld";
+
+    [ReadOnly]
+    [Tooltip("Blocks per horizontal axis")]
+    public static int BLOCKS_PER_X = 2;
+
+    [ReadOnly]
+    [Tooltip("Blocks per vertical axis")]
+    public static int BLOCKS_PER_Z = 2;
 
 
     //Public instance to game controller
@@ -46,6 +55,20 @@ public class OpenWorldController : MonoBehaviour
     [Tooltip("Resets position back to center after leaving block ranges (loaded from Settings)")]
     public int BlockOutRescale;
 
+
+    [Header("Status")]
+
+
+    [ReadOnly]
+    [Tooltip("Currently loaded and active blocks")]
+    //These are loaded initially and re-used
+    public OpenWorldBlock[] Blocks = null;
+
+    [ReadOnly]
+    [Tooltip("Current block the player is in")]
+    public OpenWorldBlock CurrentBlock;
+
+
     private void Awake()
     {
         //Create instance
@@ -66,12 +89,41 @@ public class OpenWorldController : MonoBehaviour
         HalfBlockSize = BlockSize / 2;
 
         BlockOutRescale = SettingsController.Instance.GetValue<int>(BLOCK_OUT_RESCALE);
+
+        CreateInitialBlocks();
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void CreateInitialBlocks()
+    {
+        Blocks = new OpenWorldBlock[(BLOCKS_PER_X * 2 + 1) * (BLOCKS_PER_Z * 2 + 1)];
+
+        var counter = 0;
+
+        for( var x = -BLOCKS_PER_X; x <= BLOCKS_PER_X; x++)
+        {
+            for(var z = -BLOCKS_PER_Z; z <= BLOCKS_PER_Z; z++)
+            {
+                var gameObject = Instantiate(Locator.OpenWorldPrefab, new Vector3(x * BlockSize, 0, z * BlockSize), Quaternion.identity, this.Locator.OpenWorldActiveBlocks.gameObject.transform);
+                var block = gameObject.GetComponent<OpenWorldBlock>();
+                block.UpdatePosition(x, z);
+
+                Blocks[counter] = block;
+
+                // Center
+                if ( x == 0 && z == 0 )
+                {
+                    CurrentBlock = block;
+                }
+
+                counter++;
+            }
+        }
     }
 
     public void ResetWorldToCenter()
