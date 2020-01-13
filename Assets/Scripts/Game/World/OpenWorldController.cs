@@ -90,7 +90,7 @@ public class OpenWorldController : MonoBehaviour
 
         BlockOutRescale = SettingsController.Instance.GetValue<int>(BLOCK_OUT_RESCALE);
 
-        CreateInitialBlocks();
+        CreateInitialBlocks(0,0);
     }
 
     // Update is called once per frame
@@ -99,7 +99,7 @@ public class OpenWorldController : MonoBehaviour
         
     }
 
-    public void CreateInitialBlocks()
+    public void CreateInitialBlocks(int centerX, int centerZ)
     {
         Blocks = new OpenWorldBlock[(BLOCKS_PER_X * 2 + 1) * (BLOCKS_PER_Z * 2 + 1)];
 

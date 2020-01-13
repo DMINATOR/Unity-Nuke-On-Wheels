@@ -21,6 +21,14 @@ public class OpenWorldBlock : MonoBehaviour
     public long BlockZ;
 
     [ReadOnly]
+    [Tooltip("Current block position relative to the center")]
+    public long BlockDeltaX;
+
+    [ReadOnly]
+    [Tooltip("Current block position relative to the center")]
+    public long BlockDeltaZ;
+
+    [ReadOnly]
     [Tooltip("Current block bound range min")]
     public Vector3 BoundsMin;
 
@@ -44,15 +52,15 @@ public class OpenWorldBlock : MonoBehaviour
         BlockZ = blockZ;
 
         // Calculate block bounds
-        BoundsMin.x = blockX * OpenWorldController.Instance.BlockSize;
-        BoundsMax.x = blockX * OpenWorldController.Instance.BlockSize + OpenWorldController.Instance.BlockSize;
+        BoundsMin.x = BlockDeltaX * OpenWorldController.Instance.BlockSize;
+        BoundsMax.x = BlockDeltaX * OpenWorldController.Instance.BlockSize + OpenWorldController.Instance.BlockSize;
 
-        BoundsMin.z = blockZ * OpenWorldController.Instance.BlockSize;
-        BoundsMax.z = blockZ * OpenWorldController.Instance.BlockSize + OpenWorldController.Instance.BlockSize;
+        BoundsMin.z = BlockDeltaZ * OpenWorldController.Instance.BlockSize;
+        BoundsMax.z = BlockDeltaZ * OpenWorldController.Instance.BlockSize + OpenWorldController.Instance.BlockSize;
 
         UpdateDebugInformation();
 
-        Log.Instance.Info(OpenWorldController.LOG_SOURCE, $"Block [{BlockX}, {BlockZ}] Updated");
+        Log.Instance.Info(OpenWorldController.LOG_SOURCE, $"Block [{BlockX}, {BlockZ}] -> [{BlockDeltaX}, {BlockDeltaZ}] Updated");
     }
 
     void UpdateDebugInformation()
