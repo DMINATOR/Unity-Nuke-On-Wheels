@@ -90,7 +90,10 @@ public class OpenWorldController : MonoBehaviour
 
         BlockOutRescale = SettingsController.Instance.GetValue<int>(BLOCK_OUT_RESCALE);
 
-        CreateInitialBlocks(0,0);
+        CreateInitialBlocks();
+
+        // TODO - should take player position
+        LoadBlocks(5, 5);
     }
 
     // Update is called once per frame
@@ -99,7 +102,10 @@ public class OpenWorldController : MonoBehaviour
         
     }
 
-    public void CreateInitialBlocks(int centerX, int centerZ)
+    /// <summary>
+    /// Creates initial set of blocks that will be cached and re-used
+    /// </summary>
+    public void CreateInitialBlocks()
     {
         Blocks = new OpenWorldBlock[(BLOCKS_PER_X * 2 + 1) * (BLOCKS_PER_Z * 2 + 1)];
 
@@ -111,7 +117,11 @@ public class OpenWorldController : MonoBehaviour
             {
                 var gameObject = Instantiate(Locator.OpenWorldPrefab, new Vector3(x * BlockSize, 0, z * BlockSize), Quaternion.identity, this.Locator.OpenWorldActiveBlocks.gameObject.transform);
                 var block = gameObject.GetComponent<OpenWorldBlock>();
-                block.UpdatePosition(x, z);
+
+                // Set initial values
+                block.Status = OpenWorldBlockStatus.CREATED;
+                block.QualityLevel = OpenWorldBlockQualityLevel.NONE;
+                block.SetDeltaPosition(x, z);
 
                 Blocks[counter] = block;
 
@@ -120,6 +130,30 @@ public class OpenWorldController : MonoBehaviour
                 {
                     CurrentBlock = block;
                 }
+
+                counter++;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Loads blocks with the following center position
+    /// </summary>
+    /// <param name="centerX"></param>
+    /// <param name="centerZ"></param>
+    public void LoadBlocks(int centerX, int centerZ)
+    {
+        var counter = 0;
+
+        for (var x = -BLOCKS_PER_X; x <= BLOCKS_PER_X; x++)
+        {
+            for (var z = -BLOCKS_PER_Z; z <= BLOCKS_PER_Z; z++)
+            {
+                var block = Blocks[counter];
+
+                // Load block with the game data
+                block.Status = OpenWorldBlockStatus.LOADED;
+                block.LoadWithData( centerX + x, centerZ + z);
 
                 counter++;
             }

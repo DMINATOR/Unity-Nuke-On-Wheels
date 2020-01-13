@@ -12,6 +12,8 @@ public class OpenWorldBlock : MonoBehaviour
     [Tooltip("Locator")]
     public OpenWorldBlockLocator Locator;
 
+    [Header("Game world position")]
+
     [ReadOnly]
     [Tooltip("Current block position in the universe")]
     public long BlockX;
@@ -19,6 +21,8 @@ public class OpenWorldBlock : MonoBehaviour
     [ReadOnly]
     [Tooltip("Current block position in the universe")]
     public long BlockZ;
+
+    [Header("Unity position")]
 
     [ReadOnly]
     [Tooltip("Current block position relative to the center")]
@@ -45,11 +49,11 @@ public class OpenWorldBlock : MonoBehaviour
     [Tooltip("Quality level of the block")]
     public OpenWorldBlockQualityLevel QualityLevel;
 
-    public void UpdatePosition(long blockX, long blockZ)
+    public void SetDeltaPosition(long blockDeltaX, long blockDeltaZ)
     {
         // Set current block unique position
-        BlockX = blockX;
-        BlockZ = blockZ;
+        BlockDeltaX = blockDeltaX;
+        BlockDeltaZ = blockDeltaZ;
 
         // Calculate block bounds
         BoundsMin.x = BlockDeltaX * OpenWorldController.Instance.BlockSize;
@@ -60,7 +64,17 @@ public class OpenWorldBlock : MonoBehaviour
 
         UpdateDebugInformation();
 
-        Log.Instance.Info(OpenWorldController.LOG_SOURCE, $"Block [{BlockX}, {BlockZ}] -> [{BlockDeltaX}, {BlockDeltaZ}] Updated");
+        Log.Instance.Info(OpenWorldController.LOG_SOURCE, $"Set Delta [{BlockDeltaX}, {BlockDeltaZ}]");
+    }
+
+    public void LoadWithData(long blockX, long blockZ)
+    {
+        BlockX = blockX;
+        BlockZ = blockZ;
+
+        UpdateDebugInformation();
+
+        Log.Instance.Info(OpenWorldController.LOG_SOURCE, $"Set Delta [{BlockDeltaX}, {BlockDeltaZ}]");
     }
 
     void UpdateDebugInformation()
@@ -78,29 +92,34 @@ public class OpenWorldBlock : MonoBehaviour
         switch(Status)
         {
             case OpenWorldBlockStatus.CREATED:
-                Locator.DebugBlockName.color = UnityEngine.Color.yellow;
+                Locator.DebugBlockDeltaText.color = UnityEngine.Color.yellow;
+                Locator.DebugBlockGameText.color = UnityEngine.Color.yellow;
                 break;
 
             case OpenWorldBlockStatus.LOADED:
-                Locator.DebugBlockName.color = UnityEngine.Color.green;
+                Locator.DebugBlockDeltaText.color = UnityEngine.Color.green;
+                Locator.DebugBlockGameText.color = UnityEngine.Color.green;
                 break;
 
             case OpenWorldBlockStatus.EXPIRED:
-                Locator.DebugBlockName.color = UnityEngine.Color.red;
+                Locator.DebugBlockDeltaText.color = UnityEngine.Color.red;
+                Locator.DebugBlockGameText.color = UnityEngine.Color.red;
                 break;
 
             default:
-                Locator.DebugBlockName.color = UnityEngine.Color.white;
+                Locator.DebugBlockDeltaText.color = UnityEngine.Color.white;
+                Locator.DebugBlockGameText.color = UnityEngine.Color.white;
                 break;
         }
 
-        Locator.DebugBlockName.text = $"{BlockX},{BlockZ}";
+        Locator.DebugBlockDeltaText.text = $"{BlockDeltaX},{BlockDeltaZ}";
+        Locator.DebugBlockGameText.text = $"{BlockX},{BlockZ}";
     }
 
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
