@@ -141,6 +141,10 @@ MonoBehaviour:
   Locator: {fileID: -2991628712745283695}
   BlockX: 0
   BlockZ: 0
+  BoundsMin: {x: 0, y: 0, z: 0}
+  BoundsMax: {x: 0, y: 0, z: 0}
+  Status: 0
+  QualityLevel: 0
 --- !u!114 &-2991628712745283695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -232,7 +236,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1
+    widthMultiplier: 1.01
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -277,11 +281,11 @@ LineRenderer:
       m_Mode: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
-    numCornerVertices: 0
-    numCapVertices: 0
+    numCornerVertices: 31
+    numCapVertices: 13
     alignment: 0
     textureMode: 0
     shadowBias: 0.5
     generateLightingData: 0
-  m_UseWorldSpace: 0
+  m_UseWorldSpace: 1
   m_Loop: 0
