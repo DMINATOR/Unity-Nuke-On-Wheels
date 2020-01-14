@@ -77,10 +77,10 @@ public class OpenWorldBlock : MonoBehaviour
         Log.Instance.Info(OpenWorldController.LOG_SOURCE, $"Set Delta [{BlockDeltaX}, {BlockDeltaZ}]");
     }
 
-    void UpdateDebugInformation()
+    public void UpdateDebugInformation()
     {
         //make lines to match the size of the block
-        Locator.DebugLineRenderer.SetPositions(new Vector3[]
+        Locator.DebugLineRendererEdge.SetPositions(new Vector3[]
         {
             new Vector3( BoundsMin.x, 0, BoundsMin.z),
             new Vector3( BoundsMax.x, 0, BoundsMin.z),
@@ -89,7 +89,13 @@ public class OpenWorldBlock : MonoBehaviour
             new Vector3( BoundsMin.x, 0, BoundsMin.z)
         });
 
-        switch(Status)
+        Locator.DebugLineRendererCurrent.SetPositions(new Vector3[]
+        {
+            new Vector3( BoundsMin.x, 0, BoundsMin.z),
+            new Vector3( BoundsMax.x, 0, BoundsMax.z)
+        });
+
+        switch (Status)
         {
             case OpenWorldBlockStatus.CREATED:
                 Locator.DebugBlockDeltaText.color = UnityEngine.Color.yellow;
@@ -114,6 +120,7 @@ public class OpenWorldBlock : MonoBehaviour
 
         Locator.DebugBlockDeltaText.text = $"{BlockDeltaX},{BlockDeltaZ}";
         Locator.DebugBlockGameText.text = $"{BlockX},{BlockZ}";
+        Locator.DebugLineRendererCurrent.gameObject.SetActive(this == OpenWorldController.Instance.PlayerBlock);
     }
 
     public bool IsWithin(float unityX, float unityZ)
@@ -127,12 +134,12 @@ public class OpenWorldBlock : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

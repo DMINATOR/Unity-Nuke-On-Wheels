@@ -66,8 +66,12 @@ public class OpenWorldController : MonoBehaviour
     public OpenWorldBlock[] Blocks = null;
 
     [ReadOnly]
-    [Tooltip("Current block the player is in")]
-    public OpenWorldBlock CurrentBlock;
+    [Tooltip("Center block in")]
+    public OpenWorldBlock CenterBlock;
+
+    [ReadOnly]
+    [Tooltip("Block the player is currently in")]
+    public OpenWorldBlock PlayerBlock;
 
 
     private void Awake()
@@ -129,7 +133,7 @@ public class OpenWorldController : MonoBehaviour
                 // Center
                 if ( x == 0 && z == 0 )
                 {
-                    CurrentBlock = block;
+                    CenterBlock = block;
                 }
 
                 counter++;

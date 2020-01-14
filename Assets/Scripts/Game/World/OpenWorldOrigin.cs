@@ -64,6 +64,10 @@ public class OpenWorldOrigin : MonoBehaviour
                 PreviousBlock = CurrentBlock;
 
                 CurrentBlock = OpenWorldController.Instance.FindBlock(UnityX, UnityZ);
+                OpenWorldController.Instance.PlayerBlock = CurrentBlock;
+
+                PreviousBlock.UpdateDebugInformation();
+                CurrentBlock.UpdateDebugInformation();
             }
             // Else - still within the block
         }
@@ -77,9 +81,9 @@ public class OpenWorldOrigin : MonoBehaviour
 
         if( CurrentBlock == null )
         {
-            // First time load - no block was assigned, fine the one
-            CurrentBlock = OpenWorldController.Instance.CurrentBlock;
-            PreviousBlock = OpenWorldController.Instance.CurrentBlock;
+            // First time load - no block was assigned, use center
+            CurrentBlock = OpenWorldController.Instance.CenterBlock;
+            PreviousBlock = OpenWorldController.Instance.CenterBlock;
             OpenWorldController.Instance.LoadBlocks(BlockX, BlockZ);
         }
     }
