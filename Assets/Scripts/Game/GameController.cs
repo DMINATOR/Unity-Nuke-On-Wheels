@@ -83,6 +83,10 @@ public class GameController : MonoBehaviour
 
             _saveData.SaveSlots.Add(CurrentSaveInstance);
         }
+        else
+        {
+            Log.Instance.Info(GameController.LOG_SOURCE, $"Game Data Loaded from {CurrentSaveInstance.Created}");
+        }
 
         Log.Instance.Info(GameController.LOG_SOURCE, $"Game Data Loaded");
     }
@@ -138,6 +142,7 @@ public class GameController : MonoBehaviour
 
     private void StartGame()
     {
-        // game starts here
+        // set player position
+        OpenWorldController.Instance.LoadBlocks(CurrentSaveInstance.BlockX, CurrentSaveInstance.BlockZ);
     }
 }

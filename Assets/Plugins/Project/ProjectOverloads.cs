@@ -11,10 +11,14 @@ public partial class SaveGameData : DKAsset
 [System.Serializable]
 public class SaveSlotInstance
 {
-    //Indicates that this save slot is current
+    // Indicates that this save slot is current
     public bool Current;
 
-    //Info
+    // Position in the world map
+    public long BlockX;
+    public long BlockZ;
+
+    // Info
     public DateTimeSerializer Created;
     public DateTimeSerializer Modified;
 }

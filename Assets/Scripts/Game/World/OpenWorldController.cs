@@ -13,11 +13,11 @@ public class OpenWorldController : MonoBehaviour
 
     [ReadOnly]
     [Tooltip("Blocks per horizontal axis")]
-    public static int BLOCKS_PER_X = 2;
+    public static int BLOCKS_PER_X = 4;
 
     [ReadOnly]
     [Tooltip("Blocks per vertical axis")]
-    public static int BLOCKS_PER_Z = 2;
+    public static int BLOCKS_PER_Z = 4;
 
 
     //Public instance to game controller
@@ -80,20 +80,20 @@ public class OpenWorldController : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
 
-    // Start is called before the first frame update
-    void Start()
-    {
         BlockSize = SettingsController.Instance.GetValue<int>(BLOCK_SIZE_SETTING_NAME);
         HalfBlockSize = BlockSize / 2;
 
         BlockOutRescale = SettingsController.Instance.GetValue<int>(BLOCK_OUT_RESCALE);
 
         CreateInitialBlocks();
+    }
 
+    // Start is called before the first frame update
+    void Start()
+    {
         // TODO - should take player position
-        LoadBlocks(5, 5);
+        //LoadBlocks(5, 5);
     }
 
     // Update is called once per frame
@@ -141,7 +141,7 @@ public class OpenWorldController : MonoBehaviour
     /// </summary>
     /// <param name="centerX"></param>
     /// <param name="centerZ"></param>
-    public void LoadBlocks(int centerX, int centerZ)
+    public void LoadBlocks(long centerX, long centerZ)
     {
         var counter = 0;
 
