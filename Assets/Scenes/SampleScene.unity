@@ -441,6 +441,8 @@ MonoBehaviour:
     InputKey: 3
   CurrentSaveInstance:
     Current: 0
+    BlockX: 0
+    BlockZ: 0
     Created:
       _dateTimeValue: 01/01/0001 00:00:00
     Modified:
@@ -1473,10 +1475,10 @@ GameObject:
   - component: {fileID: 1394230546}
   - component: {fileID: 1394230547}
   - component: {fileID: 1394230548}
+  - component: {fileID: 1394230552}
   - component: {fileID: 1394230550}
   - component: {fileID: 1394230549}
   - component: {fileID: 1394230551}
-  - component: {fileID: 1394230552}
   m_Layer: 0
   m_Name: Vehicle
   m_TagString: Untagged
@@ -1536,6 +1538,7 @@ MonoBehaviour:
   - {fileID: 963194227}
   - {fileID: 279073604}
   - {fileID: 232683109}
+  OpenWorldOrigin: {fileID: 1394230552}
 --- !u!114 &1394230549
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -116,6 +116,14 @@ public class OpenWorldBlock : MonoBehaviour
         Locator.DebugBlockGameText.text = $"{BlockX},{BlockZ}";
     }
 
+    public bool IsWithin(float unityX, float unityZ)
+    {
+        return unityX <= BoundsMax.x &&
+              unityZ <= BoundsMax.z &&
+              unityX >= BoundsMin.x &&
+              unityZ >= BoundsMin.z;
+    }
+
     // Start is called before the first frame update
     void Start()
     {

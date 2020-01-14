@@ -12,4 +12,7 @@ public class VehicleControllerLocator : MonoBehaviour
 
     [Tooltip("Cameras")]
     public Camera[] Cameras;
+
+    [Tooltip("Open world origin")]
+    public OpenWorldOrigin OpenWorldOrigin;
 }

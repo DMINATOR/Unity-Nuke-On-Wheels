@@ -143,6 +143,7 @@ public class GameController : MonoBehaviour
     private void StartGame()
     {
         // set player position
-        OpenWorldController.Instance.LoadBlocks(CurrentSaveInstance.BlockX, CurrentSaveInstance.BlockZ);
+        Locator.PlayerControllerVehicle.TeleportTo(CurrentSaveInstance.BlockX, CurrentSaveInstance.BlockZ);
+        //OpenWorldController.Instance.LoadBlocks(CurrentSaveInstance.BlockX, CurrentSaveInstance.BlockZ);
     }
 }

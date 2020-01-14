@@ -82,4 +82,14 @@ public class VehicleController : MonoBehaviour
 
         Locator.Cameras[index].gameObject.SetActive(true);
     }
+
+    /// <summary>
+    /// Teleport player to the specified block
+    /// </summary>
+    /// <param name="blockX"></param>
+    /// <param name="blockZ"></param>
+    internal void TeleportTo(long blockX, long blockZ)
+    {
+        Locator.OpenWorldOrigin.TeleportTo(blockX, blockZ);
+    }
 }

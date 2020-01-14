@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(OpenWorldControllerLocator))]
@@ -158,6 +159,11 @@ public class OpenWorldController : MonoBehaviour
                 counter++;
             }
         }
+    }
+
+    internal OpenWorldBlock FindBlock(float unityX, float unityZ)
+    {
+        return Blocks.SingleOrDefault(x => x.IsWithin(unityX, unityZ));
     }
 
     public void ResetWorldToCenter()
