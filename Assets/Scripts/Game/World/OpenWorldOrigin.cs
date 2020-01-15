@@ -66,6 +66,10 @@ public class OpenWorldOrigin : MonoBehaviour
                 CurrentBlock = OpenWorldController.Instance.FindBlock(UnityX, UnityZ);
                 OpenWorldController.Instance.PlayerBlock = CurrentBlock;
 
+                // Trigger events
+                PreviousBlock.OnExit(this);
+                CurrentBlock.OnEnter(this);
+
                 PreviousBlock.UpdateDebugInformation();
                 CurrentBlock.UpdateDebugInformation();
             }

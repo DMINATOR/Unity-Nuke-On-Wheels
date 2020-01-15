@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-//Generated on: 18.12.2019 21:56.03
+//Generated on: 15.01.2020 20:53.45
 public class SettingsConstants
 {
 
@@ -121,7 +121,7 @@ public class SettingsConstants
 			Name = Enum.GetName(typeof(SettingsConstants.Name), Name.BLOCK_OUT_RESCALE),
 			Type = SettingValueType.Float,
 			MinValue = "0",
-			DefaultValue = "15",
+			DefaultValue = "1",
 			MaxValue = "1000"
 		});
 

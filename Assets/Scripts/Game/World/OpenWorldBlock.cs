@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 /// <summary>
@@ -92,7 +94,9 @@ public class OpenWorldBlock : MonoBehaviour
         Locator.DebugLineRendererCurrent.SetPositions(new Vector3[]
         {
             new Vector3( BoundsMin.x, 0, BoundsMin.z),
-            new Vector3( BoundsMax.x, 0, BoundsMax.z)
+            new Vector3( BoundsMax.x, 0, BoundsMax.z),
+            new Vector3( BoundsMax.x, 0, BoundsMin.z),
+            new Vector3( BoundsMin.x, 0, BoundsMax.z)
         });
 
         switch (Status)
@@ -120,7 +124,35 @@ public class OpenWorldBlock : MonoBehaviour
 
         Locator.DebugBlockDeltaText.text = $"{BlockDeltaX},{BlockDeltaZ}";
         Locator.DebugBlockGameText.text = $"{BlockX},{BlockZ}";
-        Locator.DebugLineRendererCurrent.gameObject.SetActive(this == OpenWorldController.Instance.PlayerBlock);
+
+        if(OpenWorldController.Instance.CenterBlock != null )
+        {
+            Color color;
+            if (GetMinDistanceFromCenter() > OpenWorldController.Instance.BlockOutRescale)
+            {
+                // Outside of rescale and should re-center to the new position
+                color = Color.red;
+            }
+            else if (this == OpenWorldController.Instance.PlayerBlock)
+            {
+                // Position of the player
+                color = Color.green;
+            }
+            else
+            {
+                // Any other block
+                color = Color.white;
+            }
+
+            Gradient gradient = new Gradient();
+            gradient.SetKeys(
+                new GradientColorKey[] { new GradientColorKey(color, 0.0f), new GradientColorKey(color, 1.0f) },
+                new GradientAlphaKey[] { new GradientAlphaKey(1.0f, 0.0f), new GradientAlphaKey(1.0f, 1.0f) }
+            );
+            Locator.DebugLineRendererCurrent.colorGradient = gradient;
+        }
+
+        //Locator.DebugLineRendererCurrent.gameObject.SetActive(this == OpenWorldController.Instance.PlayerBlock);
     }
 
     public bool IsWithin(float unityX, float unityZ)
@@ -129,6 +161,28 @@ public class OpenWorldBlock : MonoBehaviour
               unityZ <= BoundsMax.z &&
               unityX >= BoundsMin.x &&
               unityZ >= BoundsMin.z;
+    }
+
+    public long GetMinDistanceFromCenter()
+    {
+        var deltaX = Math.Abs(OpenWorldController.Instance.CenterBlock.BlockX - BlockX);
+        var deltaZ = Math.Abs(OpenWorldController.Instance.CenterBlock.BlockZ - BlockZ);
+        return Math.Max(deltaX, deltaZ);
+    }
+
+    // Triggered when origin enters this block
+    public void OnEnter(OpenWorldOrigin origin)
+    {
+        if( GetMinDistanceFromCenter() > OpenWorldController.Instance.BlockOutRescale)
+        {
+            // Origin moved outside the block bounds and we need to reset the world back to the center
+            OpenWorldController.Instance.ResetWorldToCenter(this);
+        }
+    }
+
+    // Triggers when origin exits this block
+    public void OnExit(OpenWorldOrigin origin)
+    {
     }
 
     // Start is called before the first frame update

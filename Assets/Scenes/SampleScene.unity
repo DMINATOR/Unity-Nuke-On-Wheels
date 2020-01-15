@@ -559,7 +559,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &583440810
 Transform:
   m_ObjectHideFlags: 0
@@ -1610,6 +1610,8 @@ MonoBehaviour:
   BlockZ: 0
   UnityX: 0
   UnityZ: 0
+  CurrentBlock: {fileID: 0}
+  PreviousBlock: {fileID: 0}
   TranslateToCenterCallback:
     m_PersistentCalls:
       m_Calls: []
@@ -2267,7 +2269,8 @@ MonoBehaviour:
   BlockSize: 0
   BlockOutRescale: 0
   Blocks: []
-  CurrentBlock: {fileID: 0}
+  CenterBlock: {fileID: 0}
+  PlayerBlock: {fileID: 0}
 --- !u!114 &2083983954
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -170,12 +170,12 @@ public class OpenWorldController : MonoBehaviour
         return Blocks.SingleOrDefault(x => x.IsWithin(unityX, unityZ));
     }
 
-    public void ResetWorldToCenter()
+    public void ResetWorldToCenter(OpenWorldBlock block)
     {
         Log.Instance.Info(LOG_SOURCE, "ResetWorldToCenter");
 
-        var transform = Locator.PlayerOrigin.transform;
+        //var transform = Locator.PlayerOrigin.transform;
 
-        Locator.PlayerOrigin.transform.localPosition = new Vector3(0, transform.localPosition.y, 0); // Keep Y unchanged
+       // Locator.PlayerOrigin.transform.localPosition = new Vector3(0, transform.localPosition.y, 0); // Keep Y unchanged
     }
 }
