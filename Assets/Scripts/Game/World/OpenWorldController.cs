@@ -124,7 +124,7 @@ public class OpenWorldController : MonoBehaviour
                 var block = gameObject.GetComponent<OpenWorldBlock>();
 
                 // Set initial values
-                block.Status = OpenWorldBlockStatus.CREATED;
+                block.OnStatusChange( OpenWorldBlockStatus.CREATED );
                 block.QualityLevel = OpenWorldBlockQualityLevel.NONE;
                 block.SetDeltaPosition(x, z);
 
@@ -157,12 +157,106 @@ public class OpenWorldController : MonoBehaviour
                 var block = Blocks[counter];
 
                 // Load block with the game data
-                block.Status = OpenWorldBlockStatus.LOADED;
+                block.OnStatusChange( OpenWorldBlockStatus.LOADED );
                 block.LoadWithData( centerX + x, centerZ + z);
 
                 counter++;
             }
         }
+    }
+
+    /// <summary>
+    /// Translate blocks to the new position, keeping old blocks in place and create new instead
+    /// </summary>
+    /// <param name="newCenterX"></param>
+    /// <param name="newCenterZ"></param>
+    public void TranslateBlocks(long newCenterX, long newCenterZ)
+    {
+        var deltaBlockX = newCenterX - CenterBlock.BlockX;
+        var deltaBlockZ = newCenterZ - CenterBlock.BlockZ;
+
+        var counter = 0;
+
+        // Find new center block first
+        for (var x = -BLOCKS_PER_X; x <= BLOCKS_PER_X; x++)
+        {
+            for (var z = -BLOCKS_PER_Z; z <= BLOCKS_PER_Z; z++)
+            {
+                var block = Blocks[counter];
+
+                // Pick new cnter
+                if (block.BlockX == newCenterX && block.BlockZ == newCenterZ)
+                {
+                    // Shift center first relative to the old center
+                    block.Shift(deltaBlockX, deltaBlockZ);
+                    //block.SetDeltaPosition(0, 0);
+
+                    // Set it as new center
+                    CenterBlock = block;
+                }
+
+                counter++;
+            }
+        }
+
+        // Correct blocks and shift them to the direction of world movement
+        Stack<OpenWorldBlock> expiredBlocks = new Stack<OpenWorldBlock>();
+        Dictionary<Tuple<long, long>, OpenWorldBlock> blocksCache = new Dictionary<Tuple<long, long>, OpenWorldBlock>();
+        counter = 0;
+        for (var x = -BLOCKS_PER_X; x <= BLOCKS_PER_X; x++)
+        {
+            for (var z = -BLOCKS_PER_Z; z <= BLOCKS_PER_Z; z++)
+            {
+                var block = Blocks[counter];
+
+                if (block.BlockX == newCenterX && block.BlockZ == newCenterZ)
+                {
+                    // Don't do anything with center block
+                }
+                else
+                {
+                    block.Shift(deltaBlockX, deltaBlockZ);
+                    //block.SetDeltaPosition(x, z);
+                }
+
+                // Remember expired blocks
+                if( block.Status == OpenWorldBlockStatus.EXPIRED )
+                {
+                    expiredBlocks.Push(block);
+                }
+                else
+                {
+                    blocksCache[new Tuple<long,long>(block.BlockDeltaX, block.BlockDeltaZ)] = block;
+                }
+
+                counter++;
+            }
+        }
+
+        // Re-calculate blocks array
+        counter = 0;
+
+        for (var x = -BLOCKS_PER_X; x <= BLOCKS_PER_X; x++)
+        {
+            for (var z = -BLOCKS_PER_Z; z <= BLOCKS_PER_Z; z++)
+            {
+                OpenWorldBlock block;
+                if( !blocksCache.TryGetValue(new Tuple<long, long>(x, z), out block))
+                {
+                    // No block available here - get one that is expired
+                    block = expiredBlocks.Pop();
+
+                    block.SetDeltaPosition(x, z);
+                    block.LoadWithData(newCenterX + x, newCenterZ + z);
+                    block.OnStatusChange(OpenWorldBlockStatus.LOADED);
+                }
+
+                Blocks[counter] = block;
+
+                counter++;
+            }
+        }
+
     }
 
     internal OpenWorldBlock FindBlock(float unityX, float unityZ)
@@ -174,8 +268,6 @@ public class OpenWorldController : MonoBehaviour
     {
         Log.Instance.Info(LOG_SOURCE, "ResetWorldToCenter");
 
-        //var transform = Locator.PlayerOrigin.transform;
-
-       // Locator.PlayerOrigin.transform.localPosition = new Vector3(0, transform.localPosition.y, 0); // Keep Y unchanged
+        TranslateBlocks(block.BlockX, block.BlockZ);
     }
 }

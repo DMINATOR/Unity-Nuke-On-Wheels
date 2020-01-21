@@ -64,6 +64,8 @@ public class OpenWorldBlock : MonoBehaviour
         BoundsMin.z = BlockDeltaZ * OpenWorldController.Instance.BlockSize;
         BoundsMax.z = BlockDeltaZ * OpenWorldController.Instance.BlockSize + OpenWorldController.Instance.BlockSize;
 
+        this.gameObject.transform.position = new Vector3(BlockDeltaX * OpenWorldController.Instance.BlockSize, 0, BlockDeltaZ * OpenWorldController.Instance.BlockSize);
+
         UpdateDebugInformation();
 
         Log.Instance.Info(OpenWorldController.LOG_SOURCE, $"Set Delta [{BlockDeltaX}, {BlockDeltaZ}]");
@@ -125,7 +127,7 @@ public class OpenWorldBlock : MonoBehaviour
         Locator.DebugBlockDeltaText.text = $"{BlockDeltaX},{BlockDeltaZ}";
         Locator.DebugBlockGameText.text = $"{BlockX},{BlockZ}";
 
-        if(OpenWorldController.Instance.CenterBlock != null )
+        if (OpenWorldController.Instance.CenterBlock != null)
         {
             Color color;
             if (GetMinDistanceFromCenter() > OpenWorldController.Instance.BlockOutRescale)
@@ -155,6 +157,22 @@ public class OpenWorldBlock : MonoBehaviour
         //Locator.DebugLineRendererCurrent.gameObject.SetActive(this == OpenWorldController.Instance.PlayerBlock);
     }
 
+    // Shifts block position towards specific direction in Unity coordinates
+    public void Shift(long deltaBlockX, long deltaBlockZ)
+    {
+        var newDeltaBlockX = BlockDeltaX - deltaBlockX;
+        var newDeltaBlockZ = BlockDeltaZ - deltaBlockZ;
+
+        if ((GetMinDistanceFromCenterX() > OpenWorldController.BLOCKS_PER_X) ||
+            (GetMinDistanceFromCenterZ() > OpenWorldController.BLOCKS_PER_Z) )
+        {
+            // Unload if it's outside of the range
+            OnStatusChange(OpenWorldBlockStatus.EXPIRED);
+        }
+
+        SetDeltaPosition(newDeltaBlockX, newDeltaBlockZ);
+    }
+
     public bool IsWithin(float unityX, float unityZ)
     {
         return unityX <= BoundsMax.x &&
@@ -165,9 +183,17 @@ public class OpenWorldBlock : MonoBehaviour
 
     public long GetMinDistanceFromCenter()
     {
-        var deltaX = Math.Abs(OpenWorldController.Instance.CenterBlock.BlockX - BlockX);
-        var deltaZ = Math.Abs(OpenWorldController.Instance.CenterBlock.BlockZ - BlockZ);
-        return Math.Max(deltaX, deltaZ);
+        return Math.Max(GetMinDistanceFromCenterX(), GetMinDistanceFromCenterZ());
+    }
+
+    public long GetMinDistanceFromCenterX()
+    {
+        return Math.Abs(OpenWorldController.Instance.CenterBlock.BlockX - BlockX);
+    }
+
+    public long GetMinDistanceFromCenterZ()
+    {
+        return Math.Abs(OpenWorldController.Instance.CenterBlock.BlockZ - BlockZ);
     }
 
     // Triggered when origin enters this block
@@ -177,7 +203,32 @@ public class OpenWorldBlock : MonoBehaviour
         {
             // Origin moved outside the block bounds and we need to reset the world back to the center
             OpenWorldController.Instance.ResetWorldToCenter(this);
+
+            // Move to center:
+            var transform = origin.transform;
+
+            origin.transform.localPosition = new Vector3(0, transform.localPosition.y, 0); // Keep Y unchanged
         }
+    }
+
+    public void OnStatusChange(OpenWorldBlockStatus newStatus)
+    {
+        switch(newStatus)
+        {
+            case OpenWorldBlockStatus.CREATED:
+                break;
+
+            case OpenWorldBlockStatus.LOADED:
+                break;
+
+            case OpenWorldBlockStatus.EXPIRED:
+                break;
+
+            default:
+                throw new Exception($"Unknown status {newStatus}");
+        }
+
+        Status = newStatus;
     }
 
     // Triggers when origin exits this block
