@@ -201,13 +201,18 @@ public class OpenWorldBlock : MonoBehaviour
     {
         if( GetMinDistanceFromCenter() > OpenWorldController.Instance.BlockOutRescale)
         {
-            var newLocation = origin.CurrentBlock.transform.position - origin.transform.position;
+            var blockCenter = (origin.CurrentBlock.BoundsMin + origin.CurrentBlock.BoundsMax) / 2.0f;
+            var newLocation = blockCenter - origin.transform.position;
 
             // Origin moved outside the block bounds and we need to reset the world back to the center
             OpenWorldController.Instance.ResetWorldToCenter(this);
 
+            var newBlockCenter = (origin.CurrentBlock.BoundsMin + origin.CurrentBlock.BoundsMax) / 2.0f;
+            var newLocationFromBlockCenter = newBlockCenter - newLocation;
+
             // Translate to the same position in the new block
-            origin.transform.localPosition = new Vector3(newLocation.x, origin.transform.position.y, newLocation.z); // Keep Y unchanged
+            //origin.transform.localPosition = new Vector3(0, origin.transform.position.y, 0); // Keep Y unchanged
+            origin.transform.localPosition = new Vector3(newLocationFromBlockCenter.x, origin.transform.position.y, newLocationFromBlockCenter.z); // Keep Y unchanged
         }
     }
 
