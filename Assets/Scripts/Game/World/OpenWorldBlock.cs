@@ -177,6 +177,11 @@ public class OpenWorldBlock : MonoBehaviour
             // Unload if it's outside of the range
             OnStatusChange(OpenWorldBlockStatus.EXPIRED);
         }
+        else
+        {
+            // After shift verify if quality level need to be corrected
+            CalculateQualityLevel();
+        }
 
         SetDeltaPosition(newDeltaBlockX, newDeltaBlockZ);
     }
@@ -231,30 +236,7 @@ public class OpenWorldBlock : MonoBehaviour
                 break;
 
             case OpenWorldBlockStatus.LOADED:
-
-                // Determine quality level based on distance from the center block:
-                var distanceFromCenter = GetMinDistanceFromCenter();
-
-                var qualityPerRescale = OpenWorldController.Instance.BlockOutRescale; // 3 Levels of quality
-
-                if(distanceFromCenter <= qualityPerRescale * 2)
-                {
-                    OnQualityLevelChange(OpenWorldBlockQualityLevel.HIGH);
-                }
-                else if(distanceFromCenter <= qualityPerRescale * 3)
-                {
-                    OnQualityLevelChange(OpenWorldBlockQualityLevel.MEDIUM);
-                }
-                else if (distanceFromCenter <= qualityPerRescale * 4)
-                {
-                    OnQualityLevelChange(OpenWorldBlockQualityLevel.LOW);
-                }
-                else
-                {
-                    OnQualityLevelChange(OpenWorldBlockQualityLevel.NONE);
-                }
-
-
+                CalculateQualityLevel();
                 break;
 
             case OpenWorldBlockStatus.EXPIRED:
@@ -266,6 +248,32 @@ public class OpenWorldBlock : MonoBehaviour
         }
 
         Status = newStatus;
+    }
+
+    private void CalculateQualityLevel()
+    {
+        // Determine quality level based on distance from the center block:
+        var distanceFromCenter = GetMinDistanceFromCenter();
+
+        var qualityPerRescale = OpenWorldController.Instance.BlockOutRescale; // 3 Levels of quality
+
+        if (distanceFromCenter <= qualityPerRescale * 2)
+        {
+            OnQualityLevelChange(OpenWorldBlockQualityLevel.HIGH);
+        }
+        else if (distanceFromCenter <= qualityPerRescale * 3)
+        {
+            OnQualityLevelChange(OpenWorldBlockQualityLevel.MEDIUM);
+        }
+        else if (distanceFromCenter <= qualityPerRescale * 4)
+        {
+            OnQualityLevelChange(OpenWorldBlockQualityLevel.LOW);
+        }
+        else
+        {
+            OnQualityLevelChange(OpenWorldBlockQualityLevel.NONE);
+        }
+
     }
 
     public void OnQualityLevelChange(OpenWorldBlockQualityLevel newLevel)
@@ -290,6 +298,7 @@ public class OpenWorldBlock : MonoBehaviour
                     throw new Exception($"Unknown quality level {newLevel}");
             }
 
+            Log.Instance.Info(OpenWorldController.LOG_SOURCE, $"Quality [{BlockDeltaX}, {BlockDeltaZ}] {QualityLevel} -> {newLevel}");
             QualityLevel = newLevel;
         }
     }
