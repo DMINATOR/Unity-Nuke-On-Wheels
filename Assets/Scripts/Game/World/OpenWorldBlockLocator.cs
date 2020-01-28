@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class OpenWorldBlockLocator : MonoBehaviour
 {
+    [Tooltip("High quality mesh renderer")]
+    public MeshRenderer MeshHigh;
+
+
+    [Header("DEBUG")]
+
     [Tooltip("DEBUG - Used for rendering block bounds")]
     public LineRenderer DebugLineRendererEdge;
 

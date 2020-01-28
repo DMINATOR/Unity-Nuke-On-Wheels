@@ -42,6 +42,9 @@ public class OpenWorldBlock : MonoBehaviour
     [Tooltip("Current block bound range max")]
     public Vector3 BoundsMax;
 
+    [ReadOnly]
+    [Tooltip("Current center of the block")]
+    public Vector3 BoundsCenter;
 
     [ReadOnly]
     [Tooltip("Current status of the block")]
@@ -63,6 +66,9 @@ public class OpenWorldBlock : MonoBehaviour
 
         BoundsMin.z = BlockDeltaZ * OpenWorldController.Instance.BlockSize;
         BoundsMax.z = BlockDeltaZ * OpenWorldController.Instance.BlockSize + OpenWorldController.Instance.BlockSize;
+
+        // Calculate block center
+        BoundsCenter = (BoundsMin + BoundsMin) / 2.0f;
 
         this.gameObject.transform.position = new Vector3(BlockDeltaX * OpenWorldController.Instance.BlockSize, 0, BlockDeltaZ * OpenWorldController.Instance.BlockSize);
 
@@ -201,18 +207,16 @@ public class OpenWorldBlock : MonoBehaviour
     {
         if( GetMinDistanceFromCenter() > OpenWorldController.Instance.BlockOutRescale)
         {
-            var blockCenter = (origin.CurrentBlock.BoundsMin + origin.CurrentBlock.BoundsMax) / 2.0f;
-            var newLocation = blockCenter - origin.transform.position;
+            var locationBefore = origin.CurrentBlock.BoundsCenter - origin.transform.position;
 
             // Origin moved outside the block bounds and we need to reset the world back to the center
             OpenWorldController.Instance.ResetWorldToCenter(this);
 
-            var newBlockCenter = (origin.CurrentBlock.BoundsMin + origin.CurrentBlock.BoundsMax) / 2.0f;
-            var newLocationFromBlockCenter = newBlockCenter - newLocation;
+            var locationAfter = origin.CurrentBlock.BoundsCenter - locationBefore;
 
             // Translate to the same position in the new block
             //origin.transform.localPosition = new Vector3(0, origin.transform.position.y, 0); // Keep Y unchanged
-            origin.transform.localPosition = new Vector3(newLocationFromBlockCenter.x, origin.transform.position.y, newLocationFromBlockCenter.z); // Keep Y unchanged
+            origin.transform.localPosition = new Vector3(locationAfter.x, origin.transform.position.y, locationAfter.z); // Keep Y unchanged
         }
     }
 
@@ -234,6 +238,29 @@ public class OpenWorldBlock : MonoBehaviour
         }
 
         Status = newStatus;
+    }
+
+    public void OnQualityLevelChange(OpenWorldBlockQualityLevel newLevel)
+    {
+        switch(newLevel)
+        {
+            case OpenWorldBlockQualityLevel.HIGH:
+                break;
+
+            case OpenWorldBlockQualityLevel.MEDIUM:
+                break;
+
+            case OpenWorldBlockQualityLevel.LOW:
+                break;
+
+            case OpenWorldBlockQualityLevel.NONE:
+                break;
+
+            default:
+                throw new Exception($"Unknown quality level {newLevel}");
+        }
+
+        QualityLevel = newLevel;
     }
 
     // Triggers when origin exits this block
