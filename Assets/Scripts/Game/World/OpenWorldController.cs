@@ -157,7 +157,6 @@ public class OpenWorldController : MonoBehaviour
                 var block = Blocks[counter];
 
                 // Load block with the game data
-                block.OnStatusChange( OpenWorldBlockStatus.LOADED );
                 block.LoadWithData( centerX + x, centerZ + z);
 
                 counter++;

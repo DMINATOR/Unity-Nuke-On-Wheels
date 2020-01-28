@@ -82,6 +82,8 @@ public class OpenWorldBlock : MonoBehaviour
         BlockX = blockX;
         BlockZ = blockZ;
 
+        OnStatusChange(OpenWorldBlockStatus.LOADED);
+
         UpdateDebugInformation();
 
         Log.Instance.Info(OpenWorldController.LOG_SOURCE, $"Set Delta [{BlockDeltaX}, {BlockDeltaZ}]");
@@ -225,12 +227,38 @@ public class OpenWorldBlock : MonoBehaviour
         switch(newStatus)
         {
             case OpenWorldBlockStatus.CREATED:
+                OnQualityLevelChange(OpenWorldBlockQualityLevel.NONE);
                 break;
 
             case OpenWorldBlockStatus.LOADED:
+
+                // Determine quality level based on distance from the center block:
+                var distanceFromCenter = GetMinDistanceFromCenter();
+
+                var qualityPerRescale = OpenWorldController.Instance.BlockOutRescale; // 3 Levels of quality
+
+                if(distanceFromCenter <= qualityPerRescale * 2)
+                {
+                    OnQualityLevelChange(OpenWorldBlockQualityLevel.HIGH);
+                }
+                else if(distanceFromCenter <= qualityPerRescale * 3)
+                {
+                    OnQualityLevelChange(OpenWorldBlockQualityLevel.MEDIUM);
+                }
+                else if (distanceFromCenter <= qualityPerRescale * 4)
+                {
+                    OnQualityLevelChange(OpenWorldBlockQualityLevel.LOW);
+                }
+                else
+                {
+                    OnQualityLevelChange(OpenWorldBlockQualityLevel.NONE);
+                }
+
+
                 break;
 
             case OpenWorldBlockStatus.EXPIRED:
+                OnQualityLevelChange(OpenWorldBlockQualityLevel.NONE);
                 break;
 
             default:
@@ -242,25 +270,28 @@ public class OpenWorldBlock : MonoBehaviour
 
     public void OnQualityLevelChange(OpenWorldBlockQualityLevel newLevel)
     {
-        switch(newLevel)
+        if( QualityLevel != newLevel )
         {
-            case OpenWorldBlockQualityLevel.HIGH:
-                break;
+            switch (newLevel)
+            {
+                case OpenWorldBlockQualityLevel.HIGH:
+                    break;
 
-            case OpenWorldBlockQualityLevel.MEDIUM:
-                break;
+                case OpenWorldBlockQualityLevel.MEDIUM:
+                    break;
 
-            case OpenWorldBlockQualityLevel.LOW:
-                break;
+                case OpenWorldBlockQualityLevel.LOW:
+                    break;
 
-            case OpenWorldBlockQualityLevel.NONE:
-                break;
+                case OpenWorldBlockQualityLevel.NONE:
+                    break;
 
-            default:
-                throw new Exception($"Unknown quality level {newLevel}");
+                default:
+                    throw new Exception($"Unknown quality level {newLevel}");
+            }
+
+            QualityLevel = newLevel;
         }
-
-        QualityLevel = newLevel;
     }
 
     // Triggers when origin exits this block
