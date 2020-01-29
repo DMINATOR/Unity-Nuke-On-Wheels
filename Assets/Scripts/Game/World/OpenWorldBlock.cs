@@ -7,6 +7,7 @@ using UnityEngine;
 /// <summary>
 /// OpenWorld block declares a 2d space in the universe where objects will be created
 /// </summary>
+[RequireComponent(typeof(OpenWorldBlockLocator))]
 public class OpenWorldBlock : MonoBehaviour
 {
     [Header("Locator")]
@@ -237,6 +238,7 @@ public class OpenWorldBlock : MonoBehaviour
 
             case OpenWorldBlockStatus.LOADED:
                 CalculateQualityLevel();
+                Locator.Terrain.GenerateGeometry(BlockX, BlockZ);
                 break;
 
             case OpenWorldBlockStatus.EXPIRED:
@@ -280,23 +282,7 @@ public class OpenWorldBlock : MonoBehaviour
     {
         if( QualityLevel != newLevel )
         {
-            switch (newLevel)
-            {
-                case OpenWorldBlockQualityLevel.HIGH:
-                    break;
-
-                case OpenWorldBlockQualityLevel.MEDIUM:
-                    break;
-
-                case OpenWorldBlockQualityLevel.LOW:
-                    break;
-
-                case OpenWorldBlockQualityLevel.NONE:
-                    break;
-
-                default:
-                    throw new Exception($"Unknown quality level {newLevel}");
-            }
+            Locator.Terrain.OnQualityLevelChange(newLevel);
 
             Log.Instance.Info(OpenWorldController.LOG_SOURCE, $"Quality [{BlockDeltaX}, {BlockDeltaZ}] {QualityLevel} -> {newLevel}");
             QualityLevel = newLevel;

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class OpenWorldBlockLocator : MonoBehaviour
 {
-    [Tooltip("High quality mesh renderer")]
-    public MeshRenderer MeshHigh;
+    [Tooltip("Terrain")]
+    public OpenWorldBlockTerrain Terrain;
 
 
     [Header("DEBUG")]

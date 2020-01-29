@@ -247,7 +247,6 @@ public class OpenWorldController : MonoBehaviour
 
                     block.SetDeltaPosition(x, z);
                     block.LoadWithData(newCenterX + x, newCenterZ + z);
-                    block.OnStatusChange(OpenWorldBlockStatus.LOADED);
                 }
 
                 Blocks[counter] = block;

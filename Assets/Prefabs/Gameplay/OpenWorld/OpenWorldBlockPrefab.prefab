@@ -110,6 +110,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -232,6 +233,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -346,7 +348,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 568085d4b30e9344ca19472936767390, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MeshHigh: {fileID: 4691261952991547625}
+  Terrain: {fileID: 4504199606874610277}
   DebugLineRendererEdge: {fileID: 3778527074097502528}
   DebugLineRendererCurrent: {fileID: 1601582189135152188}
   DebugBlockDeltaText: {fileID: 5901934796524032724}
@@ -360,8 +362,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6710279120168678264}
+  - component: {fileID: 7717388600938629757}
+  - component: {fileID: 4504199606874610277}
   m_Layer: 0
-  m_Name: Mesh
+  m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -384,6 +388,33 @@ Transform:
   m_Father: {fileID: 754685109177692271}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7717388600938629757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7570826094068044496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a622bd24388ded4ab33248e6226b3da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Mesh: {fileID: 4316845639149234782}
+--- !u!114 &4504199606874610277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7570826094068044496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19f4b969f3199fa42993dbdfd43bc172, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Locator: {fileID: 7717388600938629757}
+  ActiveMesh: {fileID: 0}
 --- !u!1 &7595123359122714351
 GameObject:
   m_ObjectHideFlags: 0
@@ -393,7 +424,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6510436428702477704}
-  - component: {fileID: 4691261952991547625}
+  - component: {fileID: 4316845639149234782}
   m_Layer: 0
   m_Name: High
   m_TagString: Untagged
@@ -415,7 +446,7 @@ Transform:
   m_Father: {fileID: 6710279120168678264}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &4691261952991547625
+--- !u!23 &4316845639149234782
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -429,6 +460,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -498,6 +530,7 @@ LineRenderer:
   m_MotionVectors: 0
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -628,6 +661,7 @@ LineRenderer:
   m_MotionVectors: 0
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

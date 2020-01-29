@@ -18,6 +18,9 @@ public class SaveSlotInstance
     public long BlockX;
     public long BlockZ;
 
+    // World seed
+    public long Seed;
+
     // Info
     public DateTimeSerializer Created;
     public DateTimeSerializer Modified;
